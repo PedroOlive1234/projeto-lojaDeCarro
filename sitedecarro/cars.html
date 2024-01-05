@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald&display=swap">
+    <link rel="stylesheet" href="style.css">
+    <title>Carros</title>
+</head>
+<body>
+
+    <header>
+        <nav>
+            <a class="logo" href="index.html">pedro CARS</a>
+            <div class="mobile-menu">
+                <div class="line1"></div>
+                <div class="line2"></div>
+                <div class="line3"></div>
+            </div>
+            <ul class="nav-list">
+                <li><a href="index.html">HOME</a></li>
+                <li><a href="cars.html">CARROS</a></li>
+                <li><a href="cadastro.html">CADASTRO</a></li>
+                <li><a href="login.html">LOGIN</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <h2>CARROS</h2>
+    <div id="carros"></div>
+
+    <h2>CARRINHO</h2>
+    <div id="carrinho"></div>
+
+    <script>
+           const itens = [
+                {
+                    id: 0,
+                    name: 'UNO',
+                    img: 'img1.png',
+                    quant: 0,
+                    price: 30000
+                },
+                {
+                    id: 1,
+                    name: 'CELTA',
+                    img: 'img1.png',
+                    quant: 0,
+                    price: 27000
+                },
+                {
+                    id: 2,
+                    name: 'GOL',
+                    img: 'img1.png',
+                    quant: 0,
+                    price: 35000
+                },
+                {
+                    id: 3,
+                    name: 'HB20S',
+                    img: 'img1.png',
+                    quant: 0,
+                    price: 50000
+                },
+                {
+                    id: 4,
+                    name: 'ETIOS SEDAN',
+                    img: 'img1.png',
+                    quant: 0,
+                    price: 45000
+                },
+                {
+                    id: 5,
+                    name: 'CIVIC',
+                    img: 'img1.png',
+                    quant: 0,
+                    price: 130000
+                },
+                {
+                    id: 6,
+                    name: 'HR-V',
+                    img: 'img1.png',
+                    quant: 0,
+                    price: 150000
+                },
+                {
+                    id: 7,
+                    name: 'CRETA',
+                    img: 'img1.png',
+                    quant: 0,
+                    price: 145000
+                },
+                {
+                    id: 8,
+                    name: 'X1',
+                    img: 'img1.png',
+                    quant: 0,
+                    price: 230000
+                }
+            ]
+
+            inicializarLoja = () => {
+                var containerCarros = document.getElementById('carros');
+                itens.map((val)=>{
+                    containerCarros.innerHTML+= `
+
+                    <div class="carro-single">
+                        <img src="`+val.img+`" />
+                        <p>`+val.name+`</p>
+                        <p> R$ `+val.price+`</p>
+                        <a key="`+val.id+`" href="#">ADICIONAR AO CARRINHO</a>
+                    </div>
+                    `;
+                })
+            }
+
+        inicializarLoja = () => {
+            var containerCarros = document.getElementById('carros');
+            itens.map((val) => {
+                containerCarros.innerHTML += `
+                    <div class="carro-single">
+                        <img src="${val.img}" />
+                        <p>${val.name}</p>
+                        <p>R$ ${val.price}</p>
+                        <a key="${val.id}" href="#">ADICIONAR AO CARRINHO</a>
+                    </div>
+                `;
+            });
+        }
+
+        inicializarLoja();
+
+        atualizarCarrinho = () => {
+            var containerCarrinho = document.getElementById('carrinho');
+            containerCarrinho.innerHTML = "";
+            itens.map((val) => {
+                if (val.quant > 0) {
+                    containerCarrinho.innerHTML += `
+                        <div class="infocarrinho">
+                            <p style="float:left;">CARRO: ${val.name}</p>
+                            <p style="float:right;">QUANTIDADE: ${val.quant}</p>
+                            <button onclick="removerDoCarrinho(${val.id})">Remover do Carrinho</button>
+                            <div style="clear:both"></div>
+                        </div>
+                    `;
+                }
+            });
+        }
+
+        removerDoCarrinho = (id) => {
+            itens[id].quant = 0;
+            atualizarCarrinho();
+        }
+
+        var links = document.getElementsByTagName('a');
+
+        for (var i = 0; i < links.length; i++) {
+            links[i].addEventListener("click", function () {
+                let key = this.getAttribute('key');
+                itens[key].quant++;
+                atualizarCarrinho();
+                return false;
+            })
+        }
+    </script>
+
+    <script src="mobile-navbar.js"></script>
+
+    <main></main>
+
+    <footer>
+        <div class="boxs">
+            <h4>Ajuda</h4>
+            <ul>
+                <li><a href="#">Fale Conosco</a></li>
+            </ul>
+        </div>
+
+        <div class="boxs">
+            <h4>Sobre a pedro Cars</h4>
+            <ul>
+                <li><a href="#">Quem Somos</a></li>
+            </ul>
+        </div>
+
+        <div class="boxs">
+            <h4>Redes Sociais</h4>
+            <ul>
+                <li><a href="https://www.instagram.com/oficialednaldopereira/">Instagram</a></li>
+                <li><a href="https://twitter.com/oednaldopereira">Twitter</a></li>
+            </ul>
+        </div>
+    </footer>
+
+</body>
+</html>
